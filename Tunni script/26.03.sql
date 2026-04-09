@@ -35,6 +35,30 @@ create table log (
     createdat datetime default current_timestamp not null
 );
 
+create table loan (
+    id bigint unsigned primary key auto_increment,
+    accountnum bigint unsigned,
+    amount decimal(12,2) not null,
+    interest decimal(5,2) not null,
+    startdate date not null,
+    enddate date not null,
+    audituser varchar(255) not null,
+    intrest_type enum('Fikseeritud', 'annuiteet') not null,
+    foreign key (accountnum) references account(accountnumber)
+);
+
+insert into loan (accountnum, amount, interest, startdate, enddate, audituser, intrest_type) values
+(100001, 50000.00, 4.50, '2024-01-01', '2026-01-01', 'admin', 'Fikseeritud'),
+(100925, 75000.00, 5.25, '2023-06-15', '2028-06-15', 'admin', 'annuiteet'),
+(100601, 30000.00, 3.75, '2024-03-01', '2027-03-01', 'admin', 'Fikseeritud'),
+(100001, 45000.00, 5.00, '2024-02-01', '2027-02-01', 'admin', 'annuiteet'),
+(100925, 60000.00, 4.25, '2023-09-01', '2026-09-01', 'admin', 'Fikseeritud'),
+(100601, 85000.00, 5.75, '2024-01-15', '2029-01-15', 'admin', 'annuiteet'),
+(100001, 25000.00, 3.50, '2023-12-01', '2025-12-01', 'admin', 'Fikseeritud'),
+(100925, 95000.00, 6.00, '2022-05-01', '2027-05-01', 'admin', 'annuiteet'),
+(100601, 55000.00, 4.75, '2024-04-01', '2026-04-01', 'admin', 'Fikseeritud'),
+(100001, 70000.00, 5.50, '2024-05-01', '2029-05-01', 'admin', 'annuiteet');
+
 drop trigger if exists after_account_update;
 
 delimiter //
@@ -88,13 +112,11 @@ begin
    
 end//
 
-delimiter ;
-
 insert into customer (idcode, firstname, lastname, email, customertype) values (12305873, 'Ants', 'Aas', 'ants.aas@techno.ee', 'Gold');
 call open_current_account();
-call transfer(1000000001, 12305873, 5000, 12345678901, "Transfer to Ants");
-call transfer(12305873, 1000000001, 5000, 12345678920, "Return the transfer");
-call transfer(1000000002, 12305873, 6000, 83929203422, "Transfer to Ants, again");
+call transfer(100001, 100925, 5000, 12345678901, "Transfer to Ants");
+call transfer(100925, 100001, 5000, 12345678920, "Return the transfer");
+call transfer(100601, 100925, 6000, 83929203422, "Transfer to Ants, again");
 
 
 select * from accountbalance;

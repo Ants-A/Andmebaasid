@@ -647,7 +647,7 @@ INSERT INTO `account` VALUES
 (100598,3678105562,'CURR','EUR',0.00,0.00000),
 (100599,3678105565,'CURR','EUR',0.00,0.00000),
 (100600,38801231456,'CURR','EUR',0.00,0.00000),
-(100601,1000,'CURR','EUR',0.00,0.00000),
+(100601,1000,'CURR','EUR',-6000.00,0.00000),
 (100602,3678104568,'CURR','EUR',0.00,0.00000),
 (100603,3678104571,'CURR','EUR',0.00,0.00000),
 (100604,3678104574,'CURR','EUR',0.00,0.00000),
@@ -970,7 +970,8 @@ INSERT INTO `account` VALUES
 (100921,3678105554,'CURR','EUR',0.00,0.00000),
 (100922,3678105557,'CURR','EUR',0.00,0.00000),
 (100923,3678105560,'CURR','EUR',0.00,0.00000),
-(100924,3678105563,'CURR','EUR',0.00,0.00000);
+(100924,3678105563,'CURR','EUR',0.00,0.00000),
+(100925,12305873,'CURR','EUR',6000.00,0.00000);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -1050,7 +1051,7 @@ CREATE TABLE `accountbalance` (
   PRIMARY KEY (`id`),
   KEY `accountnumber` (`accountnumber`),
   CONSTRAINT `accountbalance_ibfk_1` FOREIGN KEY (`accountnumber`) REFERENCES `account` (`accountnumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1062,7 +1063,13 @@ LOCK TABLES `accountbalance` WRITE;
 /*!40000 ALTER TABLE `accountbalance` DISABLE KEYS */;
 INSERT INTO `accountbalance` VALUES
 (1,100001,-10005000.00,'2026-03-26 12:54:41'),
-(2,100003,0.00,'2026-03-26 12:54:41');
+(2,100003,0.00,'2026-03-26 12:54:41'),
+(4,100001,-10010000.00,'2026-04-09 13:11:24'),
+(5,100925,0.00,'2026-04-09 13:11:24'),
+(6,100925,5000.00,'2026-04-09 13:11:54'),
+(7,100001,-10015000.00,'2026-04-09 13:11:54'),
+(8,100601,0.00,'2026-04-09 13:11:56'),
+(9,100925,0.00,'2026-04-09 13:11:56');
 /*!40000 ALTER TABLE `accountbalance` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -1114,7 +1121,7 @@ CREATE TABLE `audit` (
   `user` varchar(64) DEFAULT NULL,
   `audittime` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2766 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2768 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2971,7 +2978,9 @@ INSERT INTO `audit` VALUES
 (2762,'ACCOUNT','100924','INS','mysql@localhost','2026-03-19 14:00:18'),
 (2763,'ACCOUNT','100001','UPD','mysql@localhost','2026-03-26 12:42:36'),
 (2764,'ACCOUNT','100002','UPD','mysql@localhost','2026-03-26 12:42:36'),
-(2765,'ACCOUNT','100002','UPD','mysql@localhost','2026-03-26 12:57:39');
+(2765,'ACCOUNT','100002','UPD','mysql@localhost','2026-03-26 12:57:39'),
+(2766,'CUSTOMER','12305873','INS','root@localhost','2026-04-09 12:59:55'),
+(2767,'ACCOUNT','100925','INS','root@localhost','2026-04-09 13:00:27');
 /*!40000 ALTER TABLE `audit` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -3043,6 +3052,7 @@ LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
 INSERT INTO `customer` VALUES
 (1000,'Meie','Pank','Pärnu mnt','meie@pank.ee','OURS',NULL,NULL,NULL,NULL),
+(12305873,'Ants','Aas',NULL,'ants.aas@techno.ee','Gold',NULL,NULL,NULL,NULL),
 (3678104567,'Joseph','Rice','91773 Miller Shoal','josephrice131@slingacademy.com','GOLD','+1-800-040-3135x6208','Diaztown',' FL 38841','M'),
 (3678104568,'Gary','Moore','6450 John Lodge','garymoore386@slingacademy.com','SILVER','221.945.4191x8872','Territon',' KY 95945','M'),
 (3678104569,'John','Walker','27265 Murray Island','johnwalker944@slingacademy.com','BASIC','388-142-4883x5370','Kevinfort',' PA 63231','M'),
@@ -4067,7 +4077,7 @@ CREATE TABLE `kuupaevad` (
   `bdate` date NOT NULL,
   `bh` enum('B','H') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=512 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=366 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4449,6 +4459,51 @@ COMMIT;
 SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 
 --
+-- Table structure for table `loan`
+--
+
+DROP TABLE IF EXISTS `loan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `loan` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `accountnum` bigint(20) unsigned DEFAULT NULL,
+  `amount` decimal(12,2) NOT NULL,
+  `interest` decimal(5,2) NOT NULL,
+  `startdate` date NOT NULL,
+  `enddate` date NOT NULL,
+  `audituser` varchar(255) NOT NULL,
+  `intrest_type` enum('Fikseeritud','annuiteet') NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `accountnum` (`accountnum`),
+  CONSTRAINT `1` FOREIGN KEY (`accountnum`) REFERENCES `account` (`accountnumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loan`
+--
+
+SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
+LOCK TABLES `loan` WRITE;
+/*!40000 ALTER TABLE `loan` DISABLE KEYS */;
+INSERT INTO `loan` VALUES
+(1,100001,50000.00,4.50,'2024-01-01','2026-01-01','admin','Fikseeritud'),
+(2,100925,75000.00,5.25,'2023-06-15','2028-06-15','admin','annuiteet'),
+(3,100601,30000.00,3.75,'2024-03-01','2027-03-01','admin','Fikseeritud'),
+(4,100001,45000.00,5.00,'2024-02-01','2027-02-01','admin','annuiteet'),
+(5,100925,60000.00,4.25,'2023-09-01','2026-09-01','admin','Fikseeritud'),
+(6,100601,85000.00,5.75,'2024-01-15','2029-01-15','admin','annuiteet'),
+(7,100001,25000.00,3.50,'2023-12-01','2025-12-01','admin','Fikseeritud'),
+(8,100925,95000.00,6.00,'2022-05-01','2027-05-01','admin','annuiteet'),
+(9,100601,55000.00,4.75,'2024-04-01','2026-04-01','admin','Fikseeritud'),
+(10,100001,70000.00,5.50,'2024-05-01','2029-05-01','admin','annuiteet');
+/*!40000 ALTER TABLE `loan` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
+
+--
 -- Table structure for table `log`
 --
 
@@ -4460,7 +4515,7 @@ CREATE TABLE `log` (
   `message` varchar(512) DEFAULT NULL,
   `createdat` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4472,42 +4527,20 @@ LOCK TABLES `log` WRITE;
 /*!40000 ALTER TABLE `log` DISABLE KEYS */;
 INSERT INTO `log` VALUES
 (1,'ERROR: 1054 (42S22) Unknown column \'accountnumb\' in \'where clause\'','2026-03-26 13:07:32'),
-(2,'ERROR: 1054 (42S22) Unknown column \'accountnumb\' in \'where clause\'','2026-04-02 12:42:19');
+(2,'ERROR: 1054 (42S22) Unknown column \'accountnumb\' in \'where clause\'','2026-04-02 12:42:19'),
+(3,'ERROR: 1054 (42S22) Unknown column \'accountnumb\' in \'WHERE\'','2026-04-09 12:45:43'),
+(4,'ERROR: 1054 (42S22) Unknown column \'accountnumb\' in \'WHERE\'','2026-04-09 12:45:44'),
+(5,'ERROR: 1054 (42S22) Unknown column \'accountnumb\' in \'WHERE\'','2026-04-09 12:45:45'),
+(6,'ERROR: 1054 (42S22) Unknown column \'accountnumb\' in \'WHERE\'','2026-04-09 12:53:19'),
+(7,'ERROR: 1452 (23000) Cannot add or update a child row: a foreign key constraint fails (`ta24abank`.`transactions`, CONSTRAINT `1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`))','2026-04-09 12:55:31'),
+(8,'ERROR: 1452 (23000) Cannot add or update a child row: a foreign key constraint fails (`ta24abank`.`transactions`, CONSTRAINT `1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`))','2026-04-09 13:00:39'),
+(9,'ERROR: 1452 (23000) Cannot add or update a child row: a foreign key constraint fails (`ta24abank`.`transactions`, CONSTRAINT `1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`))','2026-04-09 13:00:57'),
+(10,'ERROR: 1452 (23000) Cannot add or update a child row: a foreign key constraint fails (`ta24abank`.`transactions`, CONSTRAINT `1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`))','2026-04-09 13:01:01'),
+(11,'ERROR: 1452 (23000) Cannot add or update a child row: a foreign key constraint fails (`ta24abank`.`transactions`, CONSTRAINT `1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`))','2026-04-09 13:02:03'),
+(12,'ERROR: 1452 (23000) Cannot add or update a child row: a foreign key constraint fails (`ta24abank`.`transactions`, CONSTRAINT `1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`))','2026-04-09 13:05:56'),
+(13,'Warning: Debit account 100001 balance will be under 0: -10015000.00','2026-04-09 13:11:24'),
+(14,'Warning: Debit account 100601 balance will be under 0: -6000.00','2026-04-09 13:11:56');
 /*!40000 ALTER TABLE `log` ENABLE KEYS */;
-UNLOCK TABLES;
-COMMIT;
-SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
-
---
--- Table structure for table `transaction`
---
-
-DROP TABLE IF EXISTS `transaction`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transaction` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `debitaccount` bigint(20) unsigned NOT NULL,
-  `creditaccount` bigint(20) unsigned NOT NULL,
-  `sum` decimal(8,2) NOT NULL,
-  `description` varchar(128) NOT NULL,
-  `referencenumber` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `debitaccount` (`debitaccount`),
-  KEY `creditaccount` (`creditaccount`),
-  CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`),
-  CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`creditaccount`) REFERENCES `account` (`accountnumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `transaction`
---
-
-SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
-LOCK TABLES `transaction` WRITE;
-/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
@@ -4531,7 +4564,7 @@ CREATE TABLE `transactions` (
   KEY `creditaccount` (`creditaccount`),
   CONSTRAINT `1` FOREIGN KEY (`debitaccount`) REFERENCES `account` (`accountnumber`),
   CONSTRAINT `2` FOREIGN KEY (`creditaccount`) REFERENCES `account` (`accountnumber`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4541,6 +4574,10 @@ CREATE TABLE `transactions` (
 SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES
+(7,100001,100925,5000.00,'Transfer to Ants',12345678901),
+(8,100925,100001,5000.00,'Return the transfer',12345678920),
+(9,100601,100925,6000.00,'Transfer to Ants, again',83929203422);
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -4684,46 +4721,50 @@ DELIMITER ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `transfer` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
 DELIMITER ;;
-CREATE DEFINER=`mysql`@`%` PROCEDURE `transfer`(in p_debaccount bigint, in p_creaccount bigint,
-    in p_sum decimal(10,2), in p_refnumber bigint, in p_description varchar(256))
-begin
-    declare newbalance decimal(10,2);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `transfer`(
+IN p_debaccount BIGINT,
+IN p_creaccount BIGINT,
+IN p_sum DECIMAL(10,2),
+IN p_refnumber BIGINT,
+IN p_description VARCHAR(256)
+)
+BEGIN
+DECLARE newbalance DECIMAL(10,2);
 
-    declare exit handler for sqlexception
-    begin
-      
-      get diagnostics condition 1 @sqlstate = RETURNED_SQLSTATE,
-      @errno = MYSQL_ERRNO, @text = MESSAGE_TEXT;
-      set @full_error = CONCAT("ERROR: ", @errno, " (", @sqlstate, ') ', @text);
-      rollback;
-      insert into log (message) values (@full_error);
-    end;
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE, @errno = MYSQL_ERRNO, @text = MESSAGE_TEXT;
+SET @full_error = CONCAT('ERROR: ', @errno, ' (', @sqlstate, ') ', @text);
+ROLLBACK;
+INSERT INTO log (message) VALUES (@full_error);
+END;
 
-  start transaction;
-  select balance - p_sum into newbalance from account where accountnumber = p_debaccount;
+START TRANSACTION;
+SELECT balance - p_sum INTO newbalance
+FROM account
+WHERE accountnumber = p_debaccount;
 
-  if newbalance < 0 then
-	   insert into log (msg) values (concat('Warning: Debit account ', p_debaccount, ' balance will be under 0: ', newbalance));
-  end if; 
-  
-  update account set balance = balance - p_sum where accountnumb = debaccount;
-  update account set balance = balance + p_sum where accountnumber = p_creaccount;
-     
-  insert into transaction (debitaccount, creditaccount, description, referencenumber, summa)
-  values (p_debaccount, p_creaccount, p_description, p_refnumber, p_sum);
-  
-  commit;
-   
-end ;;
+IF newbalance < 0 THEN
+INSERT INTO log (message) VALUES (CONCAT('Warning: Debit account ', p_debaccount, ' balance will be under 0: ', newbalance));
+END IF;
+
+UPDATE account SET balance = balance - p_sum WHERE accountnumber = p_debaccount;
+UPDATE account SET balance = balance + p_sum WHERE accountnumber = p_creaccount;
+
+INSERT INTO transactions (debitaccount, creditaccount, description, referencenumber, sum)
+VALUES (p_debaccount, p_creaccount, p_description, p_refnumber, p_sum);
+
+COMMIT;
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -4739,4 +4780,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-04-02 13:49:23
+-- Dump completed on 2026-04-09 13:29:51
