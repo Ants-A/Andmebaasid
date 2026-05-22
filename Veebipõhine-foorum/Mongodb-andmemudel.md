@@ -1,6 +1,6 @@
 {
     subjects: 
-    [
+    {
         games: 
         {
             posts: 
@@ -37,5 +37,5 @@
                 create_date: new ISODate("2025-02-03T14:10:30.123Z"),
             }
         },
-    ]
+    }
 }

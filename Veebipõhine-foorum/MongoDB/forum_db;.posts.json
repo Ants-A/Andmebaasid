@@ -1,0 +1,149 @@
+[{
+  "_id": 101,
+  "category_id": "games",
+  "author_id": 1,
+  "title": "Dark Souls is hard",
+  "content": "Why on gods green earth is this game so hard? Any tips for the first boss?",
+  "votes": 69,
+  "is_inappropriate": false,
+  "created_at": {
+    "$date": "2026-05-20T10:03:06.212Z"
+  },
+  "moderator_discussion": [],
+  "comments": [
+    {
+      "comment_id": 1,
+      "author_id": 2,
+      "content": "This game is not that hard, you just need to roll at the right time.",
+      "votes": 12,
+      "created_at": {
+        "$date": "2026-05-20T10:03:06.212Z"
+      }
+    },
+    {
+      "comment_id": 2,
+      "author_id": 1,
+      "parent_comment_id": 1,
+      "content": "Easy for you to say, my timing is terrible!",
+      "votes": -5,
+      "created_at": {
+        "$date": "2026-05-20T10:03:06.212Z"
+      }
+    }
+  ]
+},
+{
+  "_id": 102,
+  "category_id": "games",
+  "author_id": 2,
+  "title": "Is Elden Ring easier than Dark Souls?",
+  "content": "Thinking of buying it, but I dont want to rage quit instantly.",
+  "votes": 25,
+  "is_inappropriate": false,
+  "created_at": {
+    "$date": "2026-05-20T10:03:06.212Z"
+  },
+  "moderator_discussion": [],
+  "comments": [
+    {
+      "comment_id": 1,
+      "author_id": 1,
+      "content": "Yes, because you can summon help and explore other areas if you get stuck.",
+      "votes": 18,
+      "created_at": {
+        "$date": "2026-05-20T10:03:06.212Z"
+      }
+    }
+  ]
+},
+{
+  "_id": 103,
+  "category_id": "games",
+  "author_id": 3,
+  "title": "FIFA 2026 Review",
+  "content": "The gameplay feels exactly the same as last year. Absolute waste of money.",
+  "votes": 150,
+  "is_inappropriate": false,
+  "created_at": {
+    "$date": "2026-05-20T10:03:06.212Z"
+  },
+  "moderator_discussion": [],
+  "comments": [
+    {
+      "comment_id": 1,
+      "author_id": 2,
+      "content": "Completely agree. I am switching to eFootball this season.",
+      "votes": 45,
+      "created_at": {
+        "$date": "2026-05-20T10:03:06.212Z"
+      }
+    }
+  ]
+},
+{
+  "_id": 104,
+  "category_id": "sports",
+  "author_id": 1,
+  "title": "All referees are completely blind and corrupt!!",
+  "content": "The match last night was rigged! Fire them all!",
+  "votes": -20,
+  "is_inappropriate": true,
+  "created_at": {
+    "$date": "2026-05-20T10:03:06.212Z"
+  },
+  "moderator_discussion": [
+    {
+      "moderator_id": 4,
+      "comment": "Post contains heavy accusations without proof. Marked as inappropriate.",
+      "created_at": {
+        "$date": "2026-05-20T10:03:06.212Z"
+      }
+    },
+    {
+      "moderator_id": 5,
+      "comment": "Agreed. Ban warning issued.",
+      "created_at": {
+        "$date": "2026-05-20T10:03:06.212Z"
+      }
+    }
+  ],
+  "comments": []
+},
+{
+  "_id": 105,
+  "category_id": "fighting",
+  "author_id": 2,
+  "title": "Unseen fight moves in the latest tournament",
+  "content": "Did anyone see that crazy spin kick in the main card last night? It was insane!",
+  "votes": 88,
+  "is_inappropriate": false,
+  "created_at": {
+    "$date": "2026-05-20T10:03:06.212Z"
+  },
+  "moderator_discussion": [],
+  "comments": []
+},
+{
+  "_id": 106,
+  "category_id": "fighting",
+  "author_id": 3,
+  "title": "Predictions for the upcoming Heavyweight Championship?",
+  "content": "I got Tyson by KO in round 3. What do you guys think?",
+  "votes": 42,
+  "is_inappropriate": false,
+  "created_at": {
+    "$date": "2026-05-20T10:03:06.212Z"
+  },
+  "moderator_discussion": [],
+  "comments": [
+    {
+      "comment_id": 1,
+      "author_id": 1,
+      "content": "No way, his stamina is too low for that.",
+      "votes": 10,
+      "created_at": {
+        "$date": "2026-05-20T10:03:06.212Z"
+      }
+    }
+  ]
+}]

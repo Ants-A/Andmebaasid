@@ -4,7 +4,8 @@ USE forum_db;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL UNIQUE
+    username VARCHAR(100) NOT NULL UNIQUE,
+    admin BOOLEAN DEFAULT FALSE
 );
 
 
@@ -24,7 +25,9 @@ CREATE TABLE posts (
 
     votes INT DEFAULT 0,
 
-    create_date DATETIME NOT NULL,
+    create_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    visible BOOLEAN DEFAULT TRUE,
 
     FOREIGN KEY (subject_id) REFERENCES subjects(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -44,7 +47,9 @@ CREATE TABLE comments (
 
     votes INT DEFAULT 0,
 
-    create_date DATETIME NOT NULL,
+    create_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    mod_post BOOLEAN DEFAULT FALSE,
 
     FOREIGN KEY (post_id) REFERENCES posts(id),
     FOREIGN KEY (user_id) REFERENCES users(id),

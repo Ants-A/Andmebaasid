@@ -1,0 +1,25 @@
+[{
+  "_id": 1,
+  "username": "gamer_pro",
+  "role": "user"
+},
+{
+  "_id": 2,
+  "username": "casual_player",
+  "role": "user"
+},
+{
+  "_id": 3,
+  "username": "sports_fan88",
+  "role": "user"
+},
+{
+  "_id": 4,
+  "username": "moderator_alpha",
+  "role": "moderator"
+},
+{
+  "_id": 5,
+  "username": "admin_master",
+  "role": "admin"
+}]

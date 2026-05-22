@@ -1,0 +1,17 @@
+PÄRING 1: Leia kõik postitused, mis kuuluvad "games" kategooriasse
+MongoDB: db.posts.find({ category_id: "games" });
+
+PÄRING 2: Leia postitused, millel on rohkem kui 50 häält (votes)
+MongoDB: db.posts.find({ votes: { $gt: 50 } });
+
+PÄRING 3: Leia postitused, mis on moderaatori poolt märgitud ebasobivaks
+MongoDB: db.posts.find({ is_inappropriate: true });
+
+PÄRING 4: Sorteeri postitused uuemate põhiselt
+MongoDB: db.posts.find().sort({ created_at: -1 });
+
+PÄRING 5: Leia kasutaja, kelle kasutajanimi on "gamer_pro"
+MongoDB: db.users.find({ username: "gamer_pro" });
+
+PÄRING 6: Leia kõik moderaatori rolliga kasutajad
+MongoDB: db.users.find({ role: "moderator" });

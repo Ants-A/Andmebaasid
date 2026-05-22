@@ -1,0 +1,15 @@
+[{
+  "_id": "games",
+  "name": "Gaming and eSports",
+  "description": "All things video games"
+},
+{
+  "_id": "sports",
+  "name": "Sports and Fitness",
+  "description": "Football, basketball, and more"
+},
+{
+  "_id": "fighting",
+  "name": "Combat Sports",
+  "description": "MMA, boxing, and martial arts"
+}]
