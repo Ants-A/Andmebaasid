@@ -14,6 +14,7 @@
     {
       "comment_id": 1,
       "author_id": 2,
+      "parent_comment_id": 0,
       "content": "This game is not that hard, you just need to roll at the right time.",
       "votes": 12,
       "created_at": {
@@ -48,6 +49,7 @@
     {
       "comment_id": 1,
       "author_id": 1,
+      "parent_comment_id": 0,
       "content": "Yes, because you can summon help and explore other areas if you get stuck.",
       "votes": 18,
       "created_at": {
@@ -72,6 +74,7 @@
     {
       "comment_id": 1,
       "author_id": 2,
+      "parent_comment_id": 0,
       "content": "Completely agree. I am switching to eFootball this season.",
       "votes": 45,
       "created_at": {
@@ -139,6 +142,7 @@
     {
       "comment_id": 1,
       "author_id": 1,
+      "parent_comment_id": 0,
       "content": "No way, his stamina is too low for that.",
       "votes": 10,
       "created_at": {
