@@ -66,7 +66,7 @@ players = [
     Mangijad(eesnimi='Virgil', perekonnanimi='van Dijk', sünniaeg=date(1991,7,8), riik='Netherlands', klubi='Liverpool', palk=20000000),
     Mangijad(eesnimi='Mohamed', perekonnanimi='Salah', sünniaeg=date(1992,6,15), riik='Egypt', klubi='Liverpool', palk=22000000),
     Mangijad(eesnimi='Sadio', perekonnanimi='Mané', sünniaeg=date(1992,4,10), riik='Senegal', klubi='Liverpool', palk=18000000),
-    Mangijad(eesnimi='Robert', perekonnanimi='Lewandowski', sünniaeg=date(1988,8,21), riik='Poland', klubi='Bayern Munich', palk=27000000),
+    Mangijad(eesnimi='Roberto', perekonnanimi='Palm', sünniaeg=date(1988,8,21), riik='Brazil', klubi='Bayern Munich', palk=27000000),
     Mangijad(eesnimi='Erling', perekonnanimi='Haaland', sünniaeg=date(2000,7,21), riik='Norway', klubi='Manchester City', palk=15000000)
 ]
 
